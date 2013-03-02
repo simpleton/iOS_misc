@@ -7,7 +7,7 @@
 //
 
 #import "TSTableViewController.h"
-
+#import "SBJson.h"
 @interface TSTableViewController ()
 
 @end
@@ -39,8 +39,16 @@
     _tableView.dataSource = self;
     _tableView.rowHeight = 50.0;
     
-    [self.view addSubview:self.tableView];
+    self.mSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, 50.0)];
+    self.mSearchBar.delegate = self;
+    self.mSearchBar.showsCancelButton = YES;
+    self.mSearchBar.showsBookmarkButton = YES;
+    [self.view addSubview:self.mSearchBar];
+//    [self.view addSubview:self.tableView];
     
+    if (! [self.mSearchBar respondsToSelector:@selector(setSearchFieldBackgroundImage:forState:)]) {
+        SIMLog(@"test");
+    }
     SIMLog(@"viewDidLoad");
 }
 
@@ -82,5 +90,22 @@
 
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"hello table view");
+}
+
+#pragma mark -
+#pragma mark UISearchBarDelegate
+
+- (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar {
+    SIMLog(@"searchBarBookmkarButtonClicked");
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    SIMLog(@"searchBarSearchButtonClicked");
+    [self.mSearchBar resignFirstResponder];
+}
+
+- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    SIMLog(@"searchBarCancelButtonClicked");
+    [self.mSearchBar resignFirstResponder];
 }
 @end

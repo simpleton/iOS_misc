@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TSTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface TSTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate> {
     UITableView *_tableView;
 }
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *listData;
+@property (strong, nonatomic) UISearchBar * mSearchBar;
 @end
